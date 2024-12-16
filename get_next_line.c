@@ -6,28 +6,35 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:16:06 by aelbour           #+#    #+#             */
-/*   Updated: 2024/12/15 12:46:28 by aelbour          ###   ########.fr       */
+/*   Updated: 2024/12/16 21:50:14 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	manage_prevs(char **s, char **l)
+int	manage_prevs(char **s, char **l)
 {
 	size_t	j;
 	char	*c;
 
 	j = 0;
+	// printf("func call\n");
 	while ((*s)[j])
 	{
 		if ((*s)[j++] == '\n')
 		{
-			(*l) = ft_substr((*s), j , ft_strlen((*s)));
-			free(*s);
-			(*s) = NULL;
-			return ;
+			(*l) = ft_substr((*s), 0, j);
+			(*s)[0] = 0;
+			ft_strlcat((*s), (*s) + j,BUFFER_SIZE);
+			// printf("%s\n",*s);
+			return(42);
 		}
 	}
+	(*l) = ft_strdup((*s));
+	// printf("%s\n",*l);
+	free(*s);
+	(*s) = NULL; 
+	return(0);
 }
 
 char	*get_line(char **s, char **l, int fd)
@@ -41,19 +48,21 @@ char	*get_line(char **s, char **l, int fd)
 		i = read(fd, (*s), BUFFER_SIZE);
 		j = 0;
 		// printf("%i\n",i);
-		while ((*s)[j] && i)
-			if ((*s)[j++] == '\n')
-				return (ft_strjoin((*l), ft_substr((*s), 0, j)));
-		if (i > 0 && j)
-			(*l) = ft_strjoin((*l), (*s));
-		else if (i <= 0)
+		while ((*s)[j] && i && j < i)
 		{
-			free(*s);
-			free(*l);
-			(*s) = NULL;
-			(*l) = NULL;
+			if ((*s)[j++] == '\n')
+			{
+				(*l) = ft_strjoin((*l), ft_substr((*s), 0, j) , 13);
+				(*s)[0] = 0;
+				ft_strlcat((*s), (*s) + j,BUFFER_SIZE);
+				return(*l);
+			}
 		}
+		if (i > 0 && j)
+			(*l) = ft_strjoin((*l), ft_substr((*s), 0, i), 42);
 	}
+	free(*s);
+	(*s) = NULL;
 	return (*l);
 }
 
@@ -64,21 +73,16 @@ char	*get_next_line(int fd)
 
 	l = NULL;
 	if (s)
-		manage_prevs(&s, &l);
+		if (manage_prevs(&s, &l))
+			return(l);
 	if (!s && fd >= 0)
-	{
 		s = malloc(BUFFER_SIZE + 1);
-		// printf("%p\n",s);
-		if(!s)
-			return (NULL);
-	}
 	if (fd >= 0)
 		l = get_line(&s, &l, fd);
-	// printf("%p\n",s);
-	if (!l || !s)
+	if (!l ) 
 	{
 		free(s);
-		free(l);
+		s = NULL;
 	}
 	return (l);
 }

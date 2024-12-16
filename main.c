@@ -4,17 +4,27 @@
 int main(void)
 {
     int fd = open("test.txt",O_RDONLY);
-    // char *s = malloc(11);
-    // printf("%p\n",s);
-    // read(fd, s, 10);
-    // printf("%s\n",s);
-    // printf("%p\n",s);
-    printf("%s",get_next_line(fd));   
-    printf("%s",get_next_line(fd));   
-    // printf("%s",get_next_line(fd));   
-    // printf("%s",get_next_line(fd)); 
+    char *s = malloc(11);
+    // // printf("%p\n",s);
+    // int i = read(fd, s, 4);
+    // printf("|%s| i = %i\n",s, i);
+    // i = read(fd, s, 4);
+    // printf("|%s| i = %i\n",s, i);
+    // i = read(fd, s, 4);
+    // printf("|%s| i = %i\n",s, i);
+    // i = read(fd, s, 4);
+    // printf("|%s| i = %i\n",s, i);
+    // i = read(fd, s, 4);
+    // printf("|%s| i = %i\n",s, i);
 
+
+
+    printf("%s",get_next_line(fd));   
+    printf("%s",get_next_line(fd));   
     // printf("%s",get_next_line(fd));   
+    // // printf("%s",get_next_line(fd)); 
+
     // // printf("%s",get_next_line(fd));   
-    // // printf("%s",get_next_line(fd));   
+    // // // printf("%s",get_next_line(fd));   
+    // // // printf("%s",get_next_line(fd));   
 }

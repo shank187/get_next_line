@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:16:23 by aelbour           #+#    #+#             */
-/*   Updated: 2024/12/14 18:10:38 by aelbour          ###   ########.fr       */
+/*   Updated: 2024/12/16 20:38:06 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (c);
 }
 
-char	*ft_strjoin(char *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2 ,int is_s2_leak)
 {
 	size_t	siz;
 	char	*c;
@@ -97,5 +97,9 @@ char	*ft_strjoin(char *s1, char const *s2)
 	if(s2)
 		ft_strlcat(c, s2, siz);
 	free(s1);
+	if(is_s2_leak)
+	{
+		free(s2);
+	}
 	return (c);
 }
