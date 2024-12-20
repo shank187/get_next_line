@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:16:23 by aelbour           #+#    #+#             */
-/*   Updated: 2024/12/18 17:04:49 by aelbour          ###   ########.fr       */
+/*   Updated: 2024/12/20 17:20:09 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,11 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	if(!s)
-		return(i);
+	if (!s)
+		return (i);
 	while (s[i])
 		i++;
 	return (i);
-}
-
-char	*ft_strdup(const char *s1)
-{
-	char	*c;
-	size_t	i;
-	size_t	l;
-
-	l = ft_strlen(s1);
-	i = 0;
-	c = (char *) malloc(l + 1);
-	if (!c)
-		return (NULL);
-	c[0] = 0;
-	ft_strlcat(c, s1, l + 1);
-	return (c);
 }
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
@@ -65,9 +49,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	s_len = ft_strlen((char *) s);
-	if (start > s_len)
-		return (ft_strdup(""));
 	s_len = ft_strlen((char *) &s[start]);
 	size = len + 1;
 	if (s_len < len)
@@ -80,26 +61,31 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (c);
 }
 
-char	*ft_strjoin(char *s1, char *s2 ,int is_s2_leak)
+char	*ft_strjoin(char *s1, char *s2, int is_s2_leak)
 {
 	size_t	siz;
 	char	*c;
 
-	if(!s2)
-		return(NULL);
+	if (!s2)
+	{
+		free(s1);
+		return (NULL);
+	}
 	siz = ft_strlen((char *) s1) + ft_strlen((char *) s2) + 1;
 	c = (char *) malloc(siz);
 	if (!c)
-		return (NULL);
-	c[0] = 0;
-	if(s1)
-		ft_strlcat(c, s1, ft_strlen((char *) s1) + 1);
-	if(s2)
-		ft_strlcat(c, s2, siz);
-	free(s1);
-	if(is_s2_leak)
 	{
-		free(s2);
+		if (is_s2_leak)
+			free(s2);
+		free(s1);
+		return (NULL);
 	}
+	c[0] = 0;
+	if (s1)
+		ft_strlcat(c, s1, ft_strlen((char *) s1) + 1);
+	ft_strlcat(c, s2, siz);
+	free(s1);
+	if (is_s2_leak)
+		free(s2);
 	return (c);
 }
