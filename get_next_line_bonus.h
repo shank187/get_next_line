@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:16:13 by aelbour           #+#    #+#             */
-/*   Updated: 2024/12/22 15:49:26 by aelbour          ###   ########.fr       */
+/*   Updated: 2024/12/21 18:32:58 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <libc.h>
+# include <limits.h>
 
 char	*get_ln(char **s, char **l, int fd);
 char	*get_next_line(int fd);
