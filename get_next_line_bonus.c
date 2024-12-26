@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:16:06 by aelbour           #+#    #+#             */
-/*   Updated: 2024/12/22 18:24:09 by aelbour          ###   ########.fr       */
+/*   Updated: 2024/12/26 15:55:00 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ char	*get_ln(char **s, char **l, int fd)
 	while (i)
 	{
 		i = read(fd, (*s), BUFFER_SIZE);
+		if (i < 0)
+			return (NULL);
 		j = 0;
 		(*s)[i] = 0;
 		while ((*s)[j] && i > 0 && j < i)
@@ -82,31 +84,23 @@ char	*get_ln(char **s, char **l, int fd)
 	return (*l);
 }
 
-
 char	*get_next_line(int fd)
 {
-	static char	**s;
+	static char	*s[OPEN_MAX];
 	char		*l;
-	int i;
 
-	l = NULL;
-	i = 0;
 	if (fd < 0 || read(fd, 0, 0) < 0)
-		return (NULL);
-	if (!s && BUFFER_SIZE > 0 && BUFFER_SIZE <= INT_MAX)
-	{
-		s = malloc(OPEN_MAX * sizeof(char *));
-		while(s && i < OPEN_MAX)
-			s[i++] = NULL;		
-	}
-	if (s && s[fd])
+		return (free(s[fd]), s[fd] = NULL, NULL);
+	l = NULL;
+	if (s[fd])
 		if (manage_prevs(&s[fd], &l))
 			return (l);
-	if(s && !s[fd])
-		s[fd] = malloc((size_t)BUFFER_SIZE + 1);	
-	if(s && s[fd])
-		l = get_ln(&s[fd], &l, fd);
-	if (s && !l)
+	if (!s[fd] && BUFFER_SIZE > 0 && BUFFER_SIZE <= INT_MAX)
+		s[fd] = malloc((size_t)BUFFER_SIZE + 1);
+	if (!(s[fd]))
+		return (NULL);
+	l = get_ln(&s[fd], &l, fd);
+	if (!l)
 		return (free(s[fd]), s[fd] = NULL, NULL);
 	return (l);
 }

@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:16:06 by aelbour           #+#    #+#             */
-/*   Updated: 2024/12/22 16:58:56 by aelbour          ###   ########.fr       */
+/*   Updated: 2024/12/26 17:01:46 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ char	*get_ln(char **s, char **l, int fd)
 	while (i)
 	{
 		i = read(fd, (*s), BUFFER_SIZE);
-		if(i < 0)
-			return(NULL);
+		if (i < 0)
+			return (NULL);
 		j = 0;
 		(*s)[i] = 0;
 		while ((*s)[j] && i > 0 && j < i)
