@@ -46,7 +46,7 @@ This project was a crucible for fundamental C concepts. I walked in thinking I k
 
 ## 4. My Trusted Companions: Tools Used
 
-* **GCC:** The trusty GNU C Compiler, with `Wall`, `Wextra`, `Werror` flags to catch every potential warning and turn it into an error.
+* **CC:** The trusty GNU C Compiler, with `Wall`, `Wextra`, `Werror` flags to catch every potential warning and turn it into an error.
 * **Norminette:** The 42 School's notorious coding style checker. It was a constant companion, ensuring clean, readable, and compliant code.
 * **Valgrind:** My best friend (and sometimes worst enemy) for memory leak detection. This tool was indispensable for finding those elusive `malloc`s that were never `free`d.
 * **GDB:** The GNU Debugger. For those moments when print statements just aren't enough, GDB allowed me to step through my code, inspect variables, and truly understand the execution flow, especially with tricky static variable behavior.
@@ -70,7 +70,7 @@ Oh, where to begin? `get_next_line` is notorious for a reason!
 Every bug, every Valgrind report, every Norminette error was a lesson.
 
 * **"Think Before You Code":** This project drilled into me the importance of planning the logic *before* writing a single line of code. Drawing diagrams, outlining states, and considering edge cases upfront saved immense debugging time later.
-* **Modularity is Key:** Breaking down the problem into smaller, manageable helper functions (e.g., `ft_strjoin_gnl`, `ft_strchr_gnl`, functions to update the static buffer) made the code much more understandable and testable.
+* **Modularity is Key:** Breaking down the problem into smaller, manageable helper functions made the code much more understandable and testable.
 * **Test Early, Test Often:** Running tests with various inputs and `BUFFER_SIZE` values frequently, rather than waiting until the end, helped catch bugs while they were still small and isolated.
 * **Valgrind is Your Best Friend:** Seriously, learn to read Valgrind output. It's a lifesaver for memory issues.
 * **The Power of Static:** Understanding the lifecycle and utility of static variables for maintaining state across function calls is a core concept that applies far beyond `get_next_line`.
