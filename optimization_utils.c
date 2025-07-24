@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 10:33:25 by aelbour           #+#    #+#             */
-/*   Updated: 2025/07/24 10:35:47 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/07/24 10:48:44 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 		dst[i++] = src[j++];
 	dst[i] = 0;
 	return (i + ft_strlen((char *)src) - j);
-}
+} 
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

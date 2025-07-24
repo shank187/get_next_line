@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 10:33:37 by aelbour           #+#    #+#             */
-/*   Updated: 2025/07/24 10:37:03 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/07/24 10:48:42 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strdup(const char *s1);
 char *get_next_line(int fd);
 
-
+ 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 10:27:05 by aelbour           #+#    #+#             */
-/*   Updated: 2025/07/24 10:39:10 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/07/24 10:48:38 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ char *get_next_line(int fd)
 		free(tmp);
 		return (line);
 	}
-	return (free(line), NULL);
+	return (free(line), NULL); 
 }
 
 int main(void)
