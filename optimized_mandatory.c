@@ -6,7 +6,7 @@
 /*   By: aelbour <aelbour@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 10:27:05 by aelbour           #+#    #+#             */
-/*   Updated: 2025/07/24 10:48:38 by aelbour          ###   ########.fr       */
+/*   Updated: 2025/07/25 10:16:48 by aelbour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ char	*ft_strdup(const char *s1)
 	return (c);
 }
 
-
 char *get_next_line(int fd)
 {
 	static char	*str;
@@ -87,11 +86,12 @@ char *get_next_line(int fd)
 	if (!str)
 	{
 		str = malloc(BUFFER_SIZE + 1);
-		str[0] = 0;
+		if (str)
+			str[0] = 0;
+		else
+			return (NULL);
 	}
-	if (!str)
-		return (NULL);
-		line = malloc(BUFFER_SIZE + 1);
+	line = malloc(BUFFER_SIZE + 1);
 	if(!line)
 		return (free(line), NULL);
 	if (read(fd, line, 0) == -1)
@@ -113,25 +113,28 @@ char *get_next_line(int fd)
 		line = ft_substr(str, 0, ft_strlen_chr(str, '\n') + 1);
 		free(tmp);
 		tmp = str;
-		str = ft_strdup(ft_strchr(str, '\n') + 1);
+		if (ft_strchr(str, '\n'))
+			str = ft_strdup(ft_strchr(str, '\n') + 1);
+		else 
+			str = NULL;
 		free(tmp);
 		return (line);
 	}
-	return (free(line), NULL); 
+	return (free(line), NULL);
 }
 
-int main(void)
-{
-	int i = 0;
-	char *s;
-	i = open("optimization.h", O_RDONLY);
+// int main(void)
+// {
+// 	int i = 0;
+// 	char *s;
+// 	i = open("optimization.h", O_RDONLY);
 	
-	s = get_next_line(i);
-	while(s)
-	{
-		printf("%s", s);
-		s = get_next_line(i);
-	}
-	s = get_next_line(i);
-	printf("%s", s);
-}
+// 	s = get_next_line(i);
+// 	while(s)
+// 	{
+// 		printf("%s", s);
+// 		s = get_next_line(i);
+// 	}
+// 	s = get_next_line(i);
+// 	printf("%s", s);
+// }
